@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ejercicios JSON - Clase 5</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-700 to-purple-900 text-white overflow-x-hidden">
+  <canvas id="matrix-canvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+  <main class="relative z-10 max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold text-center mb-6"> Ejercicios Interactivos - JSON</h1>
+    <p class="text-center text-lg mb-12">Selecciona la respuesta correcta. Recibirás retroalimentación inmediata.</p>
+
+    <section class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-md mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Ejercicio 1</h2>
+      <p class="mb-4">¿Cuál de los siguientes es un JSON <strong>válido</strong>?</p>
+      <div class="space-y-3">
+        <button onclick="checkAnswer(1)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">1. { nombre: "Luis", edad: 20 }</button>
+        <button onclick="checkAnswer(2)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">2. { "nombre": "Luis", "edad": 20 }</button>
+        <button onclick="checkAnswer(3)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">3. { 'nombre': "Luis", 'edad': 20 }</button>
+      </div>
+      <p id="feedback" class="mt-6 text-lg font-semibold"></p>
+    </section>
+
+    <section class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-md mb-8">
+  <h2 class="text-2xl font-semibold mb-4">Ejercicio 2</h2>
+  <p class="mb-4">¿Cuál de los siguientes JSON tiene un valor <strong>booleano</strong>?</p>
+  <div class="space-y-3">
+    <button onclick="checkAnswer(4)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">1. { "activo": "true" }</button>
+    <button onclick="checkAnswer(5)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">2. { "activo": true }</button>
+    <button onclick="checkAnswer(6)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">3. { activo: yes }</button>
+  </div>
+  <p id="feedback2" class="mt-6 text-lg font-semibold"></p>
+</section>
+
+<section class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-md mb-8">
+  <h2 class="text-2xl font-semibold mb-4">Ejercicio 3</h2>
+  <p class="mb-4">¿Cuál JSON contiene un <strong>array</strong>?</p>
+  <div class="space-y-3">
+    <button onclick="checkAnswer(7)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">1. { "colores": "rojo, azul, verde" }</button>
+    <button onclick="checkAnswer(8)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">2. { "colores": ["rojo", "azul", "verde"] }</button>
+    <button onclick="checkAnswer(9)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">3. { "colores": { "primario": "rojo" } }</button>
+  </div>
+  <p id="feedback3" class="mt-6 text-lg font-semibold"></p>
+</section>
+
+<section class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-md mb-8">
+  <h2 class="text-2xl font-semibold mb-4">Ejercicio 4</h2>
+  <p class="mb-4">¿Cuál de los siguientes JSON representa <strong>datos anidados</strong>?</p>
+  <div class="space-y-3">
+    <button onclick="checkAnswer(10)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">1. { "nombre": "Sara" }</button>
+    <button onclick="checkAnswer(11)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">2. { "nombre": "Sara", "direccion": { "ciudad": "Bogotá", "pais": "Colombia" } }</button>
+    <button onclick="checkAnswer(12)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">3. { "nombre": "Sara", "direccion": "Bogotá" }</button>
+  </div>
+  <p id="feedback4" class="mt-6 text-lg font-semibold"></p>
+</section>
+
+<section class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-md mb-8">
+  <h2 class="text-2xl font-semibold mb-4">Ejercicio 5</h2>
+  <p class="mb-4">¿Qué JSON <strong>no</strong> es válido?</p>
+  <div class="space-y-3">
+    <button onclick="checkAnswer(13)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">1. { "id": 101, "activo": false }</button>
+    <button onclick="checkAnswer(14)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">2. { "id": 101, "activo": }</button>
+    <button onclick="checkAnswer(15)" class="w-full bg-white text-purple-800 font-medium py-2 px-4 rounded-xl hover:bg-purple-100 transition">3. { "id": 101 }</button>
+  </div>
+  <p id="feedback5" class="mt-6 text-lg font-semibold"></p>
+</section>
+
+    <a href="index.html" class="block text-center mt-12 text-white underline hover:text-purple-300">← Volver a la página principal</a>
+  </main>
+
+  <script>
+    const matrixChars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    function resizeCanvas() {
+      canvas.width = width = window.innerWidth;
+      canvas.height = height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    const fontSize = 24;
+    let columns = Math.floor(width / fontSize);
+    let drops = Array(columns).fill(1);
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(30, 18, 43, 0.18)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = fontSize + "px 'Consolas', monospace";
+      for (let i = 0; i < drops.length; i++) {
+        ctx.fillStyle = '#b794f4';
+        ctx.shadowColor = '#b794f4';
+        ctx.shadowBlur = 10;
+        const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 60);
+
+    function checkAnswer(option) {
+    // Mapeo de respuestas correctas
+    const correctAnswers = {
+      2: 'feedback',       // Ejercicio 1
+      5: 'feedback2',      // Ejercicio 2
+      8: 'feedback3',      // Ejercicio 3
+      11: 'feedback4',     // Ejercicio 4
+      14: 'feedback5'      // Ejercicio 5
+    };
+
+    // Mapeo de todos los IDs de feedback
+    const allFeedbackIds = ['feedback', 'feedback2', 'feedback3', 'feedback4', 'feedback5'];
+
+    // Limpiar retroalimentación previa
+    allFeedbackIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.textContent = '';
+        el.className = '';
+      }
+    });
+
+    // Si es correcta
+    if (correctAnswers[option]) {
+      const id = correctAnswers[option];
+      const el = document.getElementById(id);
+      el.textContent = '✅ ¡Correcto!';
+      el.className = 'text-green-300 mt-6';
+    } else {
+      // Asignar retroalimentación de error según el rango
+      let id, message;
+
+      if ([1, 3].includes(option)) {
+        id = 'feedback';
+        message = '❌ Incorrecto. Revisa si las claves tienen comillas dobles y si los valores son válidos.';
+      } else if ([4, 6].includes(option)) {
+        id = 'feedback2';
+        message = '❌ Incorrecto. Recuerda que los booleanos no van entre comillas.';
+      } else if ([7, 9].includes(option)) {
+        id = 'feedback3';
+        message = '❌ Incorrecto. Solo los corchetes [] definen arrays.';
+      } else if ([10, 12].includes(option)) {
+        id = 'feedback4';
+        message = '❌ Incorrecto. Solo la opción con un objeto dentro de otro es anidada.';
+      } else if ([13, 15].includes(option)) {
+        id = 'feedback5';
+        message = '❌ Incorrecto. Observa cuál estructura está incompleta.';
+      }
+
+      if (id && message) {
+        const el = document.getElementById(id);
+        el.textContent = message;
+        el.className = 'text-red-300 mt-6';
+      }
+    }
+  }
+  </script>
+</body>
+</html>

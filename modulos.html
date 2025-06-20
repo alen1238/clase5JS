@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulos JSON - Clase 5</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-purple-700 to-purple-900 text-white overflow-x-hidden">
+  <canvas id="matrix-canvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+  <main class="relative z-10 max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold text-center mb-10">Módulos de la Clase - JSON</h1>
+
+    <section class="space-y-8">
+      <article class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow">
+        <h2 class="text-2xl font-semibold mb-2">1️⃣ ¿Qué es JSON?</h2>
+        <p class="text-lg">JSON (JavaScript Object Notation) es un formato ligero de intercambio de datos, fácil de leer y escribir para los humanos, y fácil de parsear para las máquinas. Se basa en texto y se compone de pares clave-valor.</p>
+      </article>
+
+      <article class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow">
+        <h2 class="text-2xl font-semibold mb-2">2️⃣ Estructura básica</h2>
+        <p class="text-lg">Los datos JSON pueden representarse como un <strong>objeto</strong> (clave-valor entre llaves <code>{}</code>) o un <strong>arreglo</strong> (lista de elementos entre corchetes <code>[]</code>).</p>
+        <pre class="bg-black/30 p-4 rounded mt-3 overflow-x-auto"><code>{
+  "nombre": "Ana",
+  "edad": 28,
+  "hobbies": ["leer", "programar"]
+}</code></pre>
+      </article>
+
+      <article class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow">
+        <h2 class="text-2xl font-semibold mb-2">3️⃣ Tipos de datos válidos</h2>
+        <p class="text-lg">Los tipos permitidos en JSON son:</p>
+        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+          <li><strong>string</strong> (texto entre comillas dobles)</li>
+          <li><strong>number</strong> (enteros o decimales)</li>
+          <li><strong>boolean</strong> (<code>true</code> o <code>false</code>)</li>
+          <li><strong>null</strong></li>
+          <li><strong>array</strong> (lista ordenada)</li>
+          <li><strong>object</strong> (clave-valor)</li>
+        </ul>
+      </article>
+
+      <article class="bg-white/10 backdrop-blur-md p-6 rounded-2xl shadow">
+        <h2 class="text-2xl font-semibold mb-2">4️⃣ Buenas prácticas</h2>
+        <ul class="list-disc list-inside ml-4 mt-2 space-y-1 text-lg">
+          <li>Siempre usar comillas dobles para las claves y valores de texto.</li>
+          <li>Evitar comas al final del último elemento.</li>
+          <li>Validar tu JSON usando herramientas como <a href="https://jsonlint.com" target="_blank" class="underline text-purple-200 hover:text-white">JSONLint</a>.</li>
+        </ul>
+      </article>
+    </section>
+
+    <a href="index.html" class="block text-center mt-12 text-white underline hover:text-purple-300">← Volver a la página principal</a>
+  </main>
+
+  <script>
+    const matrixChars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    function resizeCanvas() {
+      canvas.width = width = window.innerWidth;
+      canvas.height = height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    const fontSize = 24;
+    let columns = Math.floor(width / fontSize);
+    let drops = Array(columns).fill(1);
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(30, 18, 43, 0.18)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = fontSize + "px 'Consolas', monospace";
+      for (let i = 0; i < drops.length; i++) {
+        ctx.fillStyle = '#b794f4';
+        ctx.shadowColor = '#b794f4';
+        ctx.shadowBlur = 10;
+        const text = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 60);
+  </script>
+</body>
+</html>
